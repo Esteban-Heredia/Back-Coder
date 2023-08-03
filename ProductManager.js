@@ -2,9 +2,9 @@ const fs = require('fs');
 
 class ProductManager {
   constructor() {
-    this.path = './data/products.json'; // Se especifica la ruta del archivo donde se guardarán los productos
     this.products = [];
     this.id = 0;
+    this.path = './data/products.json'; // Se especifica la ruta del archivo donde se guardarán los productos
     this.loadProducts(); // Cargamos los productos del archivo cuando se crea una instancia de la clase
   }
 

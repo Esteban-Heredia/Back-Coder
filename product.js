@@ -35,5 +35,8 @@ productManager.updateProduct(1, {
   price: 15,
 });
 
-// Eliminar un producto
-productManager.deleteProduct(2);
+// // Eliminar un producto
+// productManager.deleteProduct(2);
+
+productManager.saveProducts();
+productManager.loadProducts();

@@ -1,0 +1,25 @@
+{
+  "name": "back-coder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ProductManager.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esteban-Heredia/Back-Coder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Esteban-Heredia/Back-Coder/issues"
+  },
+  "homepage": "https://github.com/Esteban-Heredia/Back-Coder#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  },
+  "type": "module"
+}

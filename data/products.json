@@ -16,5 +16,14 @@
     "code": "ASD123",
     "stock": 30,
     "id": 2
+  },
+  {
+    "title": "Producto 3",
+    "description": "Descripción del producto 3",
+    "price": 10,
+    "thumbnail": "ruta/imagen3.jpg",
+    "code": "ABC123",
+    "stock": 50,
+    "id": 3
   }
 ]

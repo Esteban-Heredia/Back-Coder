@@ -1,14 +1,15 @@
 import express from 'express';
 import routerProducts from './routers/products.js';
-// import carts from './routers/carts';
+import routerCarts from './routers/carts.js';
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/products', routerProducts);
-// app.use('/api/carts', carts )
 
-app.listen(8080, () => {
-    console.log('Servidor en el puerto 8080');
+app.use('/api/carts', routerCarts);
+
+const server = app.listen(8080, () => {
+    console.log('server on');
 });

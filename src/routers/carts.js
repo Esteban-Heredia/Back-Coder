@@ -1,9 +1,25 @@
-import { Router } from "express";
+import { Router } from 'express';
+import CartManager from '../../CartManager';
 
-const algo= Router();
+const routerCart = Router();
+const cartManager = new CartManager();
 
-algo.get('/' , (req, res) => {
-    res.send('asd')
+routerCart.post('/add', (req, res) => {
+  const productId = parseInt(req.body.productId);
+  cartManager.addToCart(productId);
+  res.status(200).send('Producto agregado al carrito');
 });
 
-export default algo
+routerCart.post('/remove', (req, res) => {
+  const productId = parseInt(req.body.productId);
+  cartManager.removeFromCart(productId);
+  res.status(200).send('Producto eliminado del carrito');
+});
+
+routerCart.get('/', (req, res) => {
+  const cartItems = cartManager.getCartItems();
+  const productsInCart = products.filter((product) => cartItems.includes(product.id));
+  res.send(productsInCart);
+});
+
+export default routerCart;

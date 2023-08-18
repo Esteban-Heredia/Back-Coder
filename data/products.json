@@ -1,6 +1,6 @@
 [
   {
-    "title": "Producto 1 Actualizado",
+    "title": "Producto1",
     "description": "Descripción del producto 1",
     "price": 15,
     "thumbnail": "ruta/imagen1.jpg",
@@ -9,7 +9,7 @@
     "id": 1
   },
   {
-    "title": "Producto 2",
+    "title": "Producto2",
     "description": "Descripción del producto 2",
     "price": 10,
     "thumbnail": "ruta/imagen2.jpg",
@@ -18,7 +18,7 @@
     "id": 2
   },
   {
-    "title": "Producto 3",
+    "title": "Producto3",
     "description": "Descripción del producto 3",
     "price": 10,
     "thumbnail": "ruta/imagen3.jpg",

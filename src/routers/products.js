@@ -2,7 +2,7 @@ import { Router } from 'express';
 import fs from 'fs';
 
 const routerProducts = Router();
-const products = JSON.parse(fs.readFileSync('../data/products.json', 'utf8'));
+const products = JSON.parse(fs.readFileSync('./data/products.json', 'utf8'));
 
 routerProducts.get('/', (req, res) => {
     const idProduct = req.query.idProduct;
@@ -50,7 +50,7 @@ routerProducts.delete('/:id', (req, res) => {
 
 routerProducts.post('/', (req, res) => {
     const newProduct = req.body;
-
+    console.log(newProduct)
     if (
       !newProduct.title ||
       !newProduct.description ||
@@ -71,7 +71,7 @@ routerProducts.post('/', (req, res) => {
 
     const newProductWithId = { ...newProduct, id: products.length + 1 };
     products.push(newProductWithId);
-    fs.writeFileSync('../data/products.json', JSON.stringify(products, null, 2), 'utf8');
+    fs.writeFileSync('./data/products.json', JSON.stringify(products, null, 2), 'utf8');
     res.status(201).send(newProductWithId);
 });
 

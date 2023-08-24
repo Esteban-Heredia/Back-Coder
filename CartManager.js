@@ -2,51 +2,52 @@ import fs from 'fs';
 
 class CartManager {
   constructor() {
-    this.cartItems = [];
-    this.path = './data/cart.json';
-    this.loadCart();
+    this.carts = [];
+    this.path = './data/carts.json';
+    this.loadCarts(); 
   }
 
-  loadCart() {
+  loadCarts() {
     try {
       const data = fs.readFileSync(this.path, 'utf-8');
-      this.cartItems = JSON.parse(data);
+      this.carts = JSON.parse(data);
     } catch (error) {
-      this.cartItems = [];
+      this.carts = [];
     }
   }
 
-  saveCart() {
+  saveCarts() {
     try {
-      fs.writeFileSync(this.path, JSON.stringify(this.cartItems, null, 2), 'utf-8');
+      fs.writeFileSync(this.path, JSON.stringify(this.carts, null, 2), 'utf-8');
     } catch (error) {
-      console.error('Error al guardar el carrito en el archivo:', error);
+      console.error('Error al guardar los carritos en el archivo:', error);
     }
   }
 
-  addToCart(productId) {
-    if (!this.cartItems.includes(productId)) {
-      this.cartItems.push(productId);
-      this.saveCart();
-      console.log('Producto agregado al carrito:', productId);
-    } else {
-      console.log('El producto ya esta en el carrito:', productId);
-    }
+  createCart() {
+    // Crear un nuevo carrito con un ID único
+    const newCart = { id: Date.now(), items: [] };
+    this.carts.push(newCart);
+    this.saveCarts(); // Guardamos los carritos actualizados en el archivo
+    console.log('Carrito creado exitosamente:', newCart);
+    return newCart;
   }
 
-  removeFromCart(productId) {
-    const index = this.cartItems.indexOf(productId);
-    if (index !== -1) {
-      this.cartItems.splice(index, 1);
-      this.saveCart();
-      console.log('Producto eliminado del carrito:', productId);
-    } else {
-      console.log('El producto no esta en el carrito:', productId);
-    }
+  getCartById(id) {
+    return this.carts.find((cart) => cart.id === id);
   }
 
-  getCartItems() {
-    return this.cartItems;
+  // Agregar productos a un carrito específico
+  addItemToCart(cartId, product) {
+    const cart = this.getCartById(cartId);
+    if (!cart) {
+      console.log('Carrito no encontrado');
+      return;
+    }
+
+    cart.items.push(product);
+    this.saveCarts(); // Guardamos los carritos actualizados en el archivo
+    console.log('Producto agregado al carrito:', product);
   }
 }
 

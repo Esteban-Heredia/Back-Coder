@@ -42,7 +42,7 @@ routerProducts.delete('/:id', (req, res) => {
     }
 
     const deletedProduct = products.splice(productFiltrado, 1)[0];
-    fs.writeFileSync('../data/products.json', JSON.stringify(products, null, 2), 'utf8');
+    fs.writeFileSync('./data/products.json', JSON.stringify(products, null, 2), 'utf8');
 
     res.status(200).send(`Producto eliminado: ${deletedProduct.title}`);
 });
@@ -50,7 +50,6 @@ routerProducts.delete('/:id', (req, res) => {
 
 routerProducts.post('/', (req, res) => {
     const newProduct = req.body;
-    console.log(newProduct)
     if (
       !newProduct.title ||
       !newProduct.description ||

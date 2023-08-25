@@ -4,7 +4,7 @@ class CartManager {
   constructor() {
     this.carts = [];
     this.path = './data/carts.json';
-    this.loadCarts(); 
+    this.loadCarts();
   }
 
   loadCarts() {
@@ -45,7 +45,7 @@ class CartManager {
       return;
     }
 
-    cart.items.push(product);
+
     this.saveCarts(); // Guardamos los carritos actualizados en el archivo
     console.log('Producto agregado al carrito:', product);
   }

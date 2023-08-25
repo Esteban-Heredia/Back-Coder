@@ -5,6 +5,7 @@ import routerCarts from './routers/carts.js';
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use('/api/products', routerProducts);
 

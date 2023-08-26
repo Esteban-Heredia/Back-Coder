@@ -1,55 +1,93 @@
 import { Router } from 'express';
 import CartManager from '../../CartManager.js';
 import ProductManager from '../../ProductManager.js';
-import fs from 'fs'
 
 const routerCart = Router();
 const cartManager = new CartManager();
 const productManager = new ProductManager();
-const cart = JSON.parse(fs.readFileSync('./data/carts.json', 'utf-8') )
 
 routerCart.get('/', (req, res) => {
-  res.status(200).json(cart);
+  const carts = cartManager.getCarts()
+  
+  res.status(200).json(carts);
+});
+
+routerCart.get('/:id', (req, res) => {
+  const cartId = parseInt(req.params.id)
+  const carts = cartManager.getCartById(cartId)
+
+  if(carts){
+    res.status(200).send(carts);
+  } else {
+    res.status(404).send("Carrito no encontrado")
+  }
 });
 
 routerCart.post('/', (req,res)=>{
   const newCart = req.body;
-  if (!newCart.id){
-    res.status(400).send('el id debe ser obligatorio para agregar al carrito')
-  }
+  const cart = cartManager.createCart(newCart)
 
-  const newCartID = {...newCart, id: cart.length + 1};
-  cart.push(newCartID);
-  fs.writeFileSync('./data/carts.json', JSON.stringify(cart, null, 2), 'utf8');
-  res.status(201).send(newCartID)
+  res.status(200).send(cart)
 });
 
+routerCart.delete('/:id', (req, res) => {
+  const cartId = parseInt(req.params.id);
+  const cart = cartManager.deleteCarts(cartId)
 
-routerCart.put('/add/:cartId', (req, res) => {
-  const cartId = parseInt(req.params.productId);
-  const productID = req.body.productID
-  const product = productManager.getProductById(productID);
-
-  if (product) {
-    cartManager.addItemToCart(cartId, product);
-    res.status(200).send({ message: "Producto agregado al carrito exitosamente" });
+  if (cart) {
+    res.status(200).send('Carrito eliminado')
   } else {
-    res.status(400).send({ error: "Producto no encontrado" });
+    res.status(400).send ('El carrito no se pudo eliminar')
   }
-
 });
 
-routerCart.delete('/remove/:productId', (req, res) => {
-  const productId = parseInt(req.params.productId);
+routerCart.put('/:cartId/:productId', (req, res) => {
+  const cartId = parseInt(req.params.cartId);
+  const productId = parseInt(req.params.productId)
+  const cartSelect = cartManager.getCartById(cartId)
 
-  // Verifica si el producto existe en el carrito antes de eliminarlo
-  const product = productManager.getProductById(productId);
-  if (!product) {
-    return res.status(404).json({ error: 'Producto no encontrado en el carrito' });
+  if(!cartSelect){
+    res.status(404).send({error: "Carrito no encontrado"})
+    return false
   }
 
-  cartManager.removeFromCart(productId);
-  res.status(204).end();
+  if(cartSelect){
+    const product = productManager.getProductById(productId);
+
+    if(!product){
+      res.status(404).send({error: "Producto no encontrado para agregar al carrito existente"})
+      return false
+    }
+    cartManager.addItemToCart(cartId, product)
+    res.status(201).send(`El producto agregado fue: ${product.title}`)
+  }
+});
+
+routerCart.delete('/:cartId/:productId', (req, res) => {
+  const cartId = parseInt(req.params.cartId);
+  const productId = parseInt(req.params.productId)
+  const cartSelect = cartManager.getCartById(cartId)
+
+  if(!cartSelect){
+    res.status(404).send({error: "Carrito no encontrado"})
+    return false
+  }
+
+  if(cartSelect){
+    const product = productManager.getProductById(productId);
+
+    if(!product){
+      res.status(404).send({error: "Producto no encontrado para borrar del carrito existente"})
+      return false
+    }
+    const productDeleted = cartManager.deleteItemCart(cartId, productId);
+
+    if (productDeleted) {
+      res.status(200).send(`El producto borrado fue: ${product.title}`);
+    } else {
+      res.status(400).send({ error: "Error al borrar el producto del carrito" });
+    }
+  }
 });
 
 export default routerCart;

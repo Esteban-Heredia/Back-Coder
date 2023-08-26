@@ -1,17 +1,17 @@
 import fs from 'fs'
-
 class ProductManager {
   constructor() {
     this.products = [];
     this.id = 0;
-    this.path = './data/products.json'; // Se especifica la ruta del archivo donde se guardarán los productos
-    this.loadProducts(); // Cargamos los productos del archivo cuando se crea una instancia de la clase
+    this.path = './data/products.json';
+    this.loadProducts()
   }
 
   loadProducts() {
     try {
-      const data = fs.readFileSync(this.path, 'utf-8');
+      const data = fs.readFileSync(this.path, 'utf8');
       this.products = JSON.parse(data);
+
       // Establecemos el id con el valor máximo encontrado para asegurarnos de que los nuevos productos tengan ids únicos
       if (this.products.length > 0) {
         this.id = Math.max(...this.products.map((p) => p.id));
@@ -41,14 +41,14 @@ class ProductManager {
       !product.stock
     ) {
       console.log("Todos los campos son obligatorios");
-      return;
+      return false;
     }
 
     // Validar que no se repita el campo "code"
     const existingProduct = this.products.find((p) => p.code === product.code);
     if (existingProduct) {
       console.log("El código del producto ya está en uso");
-      return;
+      return false;
     }
 
     // Agregar el producto con un id que se vaya sumando
@@ -56,6 +56,7 @@ class ProductManager {
     this.products.push(newProduct);
     this.saveProducts(); // Guardamos los productos actualizados en el archivo
     console.log("Producto agregado exitosamente:", newProduct);
+    return true
   }
 
   getProducts() {
@@ -74,26 +75,28 @@ class ProductManager {
     const index = this.products.findIndex((p) => p.id === id);
     if (index === -1) {
       console.log("Producto no encontrado");
-      return;
+      return false;
     }
 
     // Actualizamos el producto con los nuevos valores proporcionados
     this.products[index] = { ...this.products[index], ...updatedProduct };
     this.saveProducts(); // Guardamos los productos actualizados en el archivo
     console.log("Producto actualizado exitosamente:", this.products[index]);
+    return true;
   }
 
   deleteProduct(id) {
     const index = this.products.findIndex((p) => p.id === id);
     if (index === -1) {
       console.log("Producto no encontrado");
-      return;
+      return false;
     }
 
     // Eliminamos el producto del array
     const deletedProduct = this.products.splice(index, 1)[0];
     this.saveProducts(); // Guardamos los productos actualizados en el archivo
     console.log("Producto eliminado:", deletedProduct);
+    return true;
   }
 }
 

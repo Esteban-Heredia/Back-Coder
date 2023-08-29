@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import ProductManager from '../../ProductManager.js';
+import { uploader } from '../utils.js';
 
 const routerProducts = Router();
 const productManager = new ProductManager();
@@ -32,8 +33,9 @@ routerProducts.delete('/:id', (req, res) => {
     }
 });
 
-routerProducts.post('/', (req, res) => {
+routerProducts.post('/',uploader.single('thumbnail'), (req, res) => {
     const newProduct = req.body;
+    newProduct.thumbnail = `http://localhost:8080/public/img/${req.file.filename}`
     const product = productManager.addProduct(newProduct)
 
     if(product){

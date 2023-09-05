@@ -41,7 +41,7 @@
     "price": "54",
     "code": "asd123",
     "stock": "54",
-    "thumbnail": "http://localhost:8080/public/img/image.png",
+    "thumbnail": "http://localhost:8080/static/img/image.png",
     "id": 5
   },
   {
@@ -50,7 +50,16 @@
     "price": "54",
     "code": "asd123sd",
     "stock": "54",
-    "thumbnail": "http://localhost:8080/public/img/Recurso 1.png",
+    "thumbnail": "http://localhost:8080/static/img/Recurso 1.png",
     "id": 6
+  },
+  {
+    "title": "asd",
+    "description": "asd",
+    "price": "50",
+    "code": "a555",
+    "stock": "5",
+    "thumbnail": "http://localhost:8080/static/img/Screenshot 2023-09-01 at 14-46-02 TransPro - Transport & Logistics Service React Template.png",
+    "id": 7
   }
 ]

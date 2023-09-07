@@ -61,5 +61,59 @@
     "stock": "5",
     "thumbnail": "http://localhost:8080/static/img/Screenshot 2023-09-01 at 14-46-02 TransPro - Transport & Logistics Service React Template.png",
     "id": 7
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "54555",
+    "code": "asd123sdsd",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 8
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "54555",
+    "code": "asd123sds",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 9
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "5455588",
+    "code": "asd123sds2323",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 10
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "5455588",
+    "code": "asd123sds2323asd",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 11
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "5455588",
+    "code": "asd123sds2323asdasd",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 12
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "20",
+    "code": "asd555",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 13
   }
 ]

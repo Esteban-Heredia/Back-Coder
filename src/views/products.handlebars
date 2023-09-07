@@ -1,3 +1,8 @@
 <div>
-    aca estan los productos
+      <h1>Lista de Productos</h1>
+    <ul>
+        {{#each products}}
+        <li>{{title}} - Precio: ${{price}}</li>
+        {{/each}}
+    </ul>
 </div>

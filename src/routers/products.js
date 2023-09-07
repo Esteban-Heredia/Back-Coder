@@ -8,7 +8,7 @@ const productManager = new ProductManager();
 routerProducts.get('/', (req, res) => {
     const products = productManager.getProducts()
 
-    res.send(products)
+    res.render('products',{ products });
 });
 
 routerProducts.get('/:id' ,(req,res) => {

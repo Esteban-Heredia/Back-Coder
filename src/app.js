@@ -52,15 +52,11 @@ serverSocket.on('connection', socket =>{
     })
 
     socket.on('eliminar', data => {
-        // Aquí debes asegurarte de que 'data' contenga el ID del producto a eliminar
-        const productId = data; // Supongo que 'data' es el ID del producto
-        
-        // Elimina el producto en el servidor
+        const productId = data;
         const deletedProduct = pManager.deleteProduct(productId);
 
         if (deletedProduct) {
             console.log(`Producto eliminado con ID ${productId}`);
-            // Emitir una actualización de productos a todos los clientes conectados
             serverSocket.emit('log', { products: pManager.getProducts() });
         } else {
             console.log(`No se pudo eliminar el producto con ID ${productId}`);

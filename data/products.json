@@ -115,59 +115,5 @@
     "stock": "54555",
     "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
     "id": 16
-  },
-  {
-    "title": "asdadaa",
-    "description": "sad",
-    "price": "202",
-    "code": "21212",
-    "stock": "54555",
-    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
-    "id": 17
-  },
-  {
-    "title": "Producto3",
-    "description": "Descripción del producto 3",
-    "price": 10,
-    "thumbnail": "ruta/imagen3.jpg",
-    "code": "ABC123sad",
-    "stock": 50,
-    "id": 18
-  },
-  {
-    "title": "asd",
-    "description": "qwewq",
-    "price": "545",
-    "code": "s85s5s8e",
-    "stock": "54",
-    "thumbnail": "http://localhost:8080/static/img/Group 159.png",
-    "id": 19
-  },
-  {
-    "title": "ajojojo",
-    "description": "asdjoasdo",
-    "price": "213",
-    "thumbnail": "C:\\fakepath\\Group 159.png",
-    "code": "213dsad",
-    "stock": "12312",
-    "id": 20
-  },
-  {
-    "title": "ajojojo",
-    "description": "asdjoasdo",
-    "price": "213",
-    "thumbnail": "C:\\fakepath\\Group 159.png",
-    "code": "213dsadsdsd",
-    "stock": "12312",
-    "id": 21
-  },
-  {
-    "title": "ajojojo",
-    "description": "asdjoasdo",
-    "price": "213343",
-    "thumbnail": "C:\\fakepath\\Group 159.png",
-    "code": "213dsadsdsdasd",
-    "stock": "12312",
-    "id": 22
   }
 ]

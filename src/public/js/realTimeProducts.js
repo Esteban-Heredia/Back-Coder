@@ -27,7 +27,7 @@ form.addEventListener("submit", (evt) => {
 
 idDelete.addEventListener("keyup", (evt) => {
     if (evt.key === "Enter") {
-      socket.emit("eliminar", idDelete.value);
+      socket.emit("eliminar", parseInt(idDelete.value));
       idDelete.value = "";
       console.log("asdasd")
     }

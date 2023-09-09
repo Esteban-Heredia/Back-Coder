@@ -8,7 +8,7 @@ const price = document.getElementById('price');
 const thumbnail = document.getElementById('thumbnail');
 const code = document.getElementById('code');
 const stock = document.getElementById('stock');
-
+const idDelete = document.getElementById('deleteProducts')
 
 form.addEventListener("submit", (evt) => {
     evt.preventDefault()
@@ -20,11 +20,18 @@ form.addEventListener("submit", (evt) => {
         code: code.value,
         stock: stock.value,
     }
-    socket.emit("mensaje", data);
+    socket.emit("agregar", data);
     console.log(data)
   }
 );
 
+idDelete.addEventListener("keyup", (evt) => {
+    if (evt.key === "Enter") {
+      socket.emit("eliminar", idDelete.value);
+      idDelete.value = "";
+      console.log("asdasd")
+    }
+  });
 
 socket.on("log", ({ products }) => {
   const productList = document.getElementById("log");

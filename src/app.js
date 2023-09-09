@@ -37,7 +37,7 @@ const pManager = new ProductManager
 serverSocket.on('connection', socket =>{
     console.log("nuevo cliente conectado")
     
-    socket.on('mensaje', data =>{
+    socket.on('agregar', data =>{
         const product =   {
             "title": data.title,
             "description": data.description,
@@ -50,4 +50,20 @@ serverSocket.on('connection', socket =>{
         pManager.addProduct(product)
         serverSocket.emit('log',{products: pManager.getProducts()})
     })
+
+    socket.on('eliminar', data => {
+        // Aquí debes asegurarte de que 'data' contenga el ID del producto a eliminar
+        const productId = data; // Supongo que 'data' es el ID del producto
+        
+        // Elimina el producto en el servidor
+        const deletedProduct = pManager.deleteProduct(productId);
+
+        if (deletedProduct) {
+            console.log(`Producto eliminado con ID ${productId}`);
+            // Emitir una actualización de productos a todos los clientes conectados
+            serverSocket.emit('log', { products: pManager.getProducts() });
+        } else {
+            console.log(`No se pudo eliminar el producto con ID ${productId}`);
+        }
+    });
 })

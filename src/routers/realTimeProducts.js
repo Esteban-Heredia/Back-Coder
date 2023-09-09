@@ -11,6 +11,11 @@ realTimeProducts.get('/', (req, res) => {
     res.render('realTimeProducts',{ products });
 });
 
+realTimeProducts.get('/getProducts', (req, res) => {
+  const products = productManager.getProducts();
+  res.json(products);
+});
+
 realTimeProducts.get('/:id' ,(req,res) => {
   const productid = parseInt(req.params.id)
   const product = productManager.getProductById(productid)

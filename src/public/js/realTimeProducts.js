@@ -1,19 +1,38 @@
 const socket = io();
 
-const input = document.getElementById('textbox');
-const log = document.getElementById('log');
+const form = document.getElementById("textbox");
+const log = document.getElementById("log");
+const title = document.getElementById('title');
+const description = document.getElementById('description');
+const price = document.getElementById('price');
+const thumbnail = document.getElementById('thumbnail');
+const code = document.getElementById('code');
+const stock = document.getElementById('stock');
 
-input.addEventListener('keyup', evt=>{
-   if (evt.key === "Enter"){
-    socket.emit('mensaje', input.value);
-    input.value ="";
-   }
-})
 
-socket.on ('log', data=>{
-    let mensajes = "";
-    data.logs.forEach(log => {
-        mensajes += `${log.socketId} dice: ${log.mensaje} <br/>`
-    });
-    log.innerHTML = mensajes
-})
+form.addEventListener("submit", (evt) => {
+    evt.preventDefault()
+    const data= {
+        title: title.value,
+        description: description.value,
+        price: price.value,
+        thumbnail: thumbnail.value,
+        code: code.value,
+        stock: stock.value,
+    }
+    socket.emit("mensaje", data);
+    console.log(data)
+  }
+);
+
+
+socket.on("log", ({ products }) => {
+  const productList = document.getElementById("log");
+  productList.innerHTML = ""; // Limpia la lista de productos
+
+  products.forEach((product) => {
+    const listItem = document.createElement("li");
+    listItem.innerText = `${product.title} - Precio: $${product.price}`;
+    productList.appendChild(listItem);
+  });
+});

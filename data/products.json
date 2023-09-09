@@ -9,15 +9,6 @@
     "id": 1
   },
   {
-    "title": "Producto2",
-    "description": "Descripción del producto 2",
-    "price": 10,
-    "thumbnail": "ruta/imagen2.jpg",
-    "code": "ASD123",
-    "stock": 30,
-    "id": 2
-  },
-  {
     "title": "Producto3",
     "description": "Descripción del producto 3",
     "price": 10,
@@ -34,24 +25,6 @@
     "code": "PROD123",
     "stock": 10,
     "id": 4
-  },
-  {
-    "title": "asd",
-    "description": "sad",
-    "price": "54",
-    "code": "asd123",
-    "stock": "54",
-    "thumbnail": "http://localhost:8080/static/img/image.png",
-    "id": 5
-  },
-  {
-    "title": "asd",
-    "description": "sad",
-    "price": "54",
-    "code": "asd123sd",
-    "stock": "54",
-    "thumbnail": "http://localhost:8080/static/img/Recurso 1.png",
-    "id": 6
   },
   {
     "title": "asd",
@@ -133,5 +106,68 @@
     "stock": "54555",
     "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
     "id": 15
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "20",
+    "code": "2121",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 16
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "202",
+    "code": "21212",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 17
+  },
+  {
+    "title": "Producto3",
+    "description": "Descripción del producto 3",
+    "price": 10,
+    "thumbnail": "ruta/imagen3.jpg",
+    "code": "ABC123sad",
+    "stock": 50,
+    "id": 18
+  },
+  {
+    "title": "asd",
+    "description": "qwewq",
+    "price": "545",
+    "code": "s85s5s8e",
+    "stock": "54",
+    "thumbnail": "http://localhost:8080/static/img/Group 159.png",
+    "id": 19
+  },
+  {
+    "title": "ajojojo",
+    "description": "asdjoasdo",
+    "price": "213",
+    "thumbnail": "C:\\fakepath\\Group 159.png",
+    "code": "213dsad",
+    "stock": "12312",
+    "id": 20
+  },
+  {
+    "title": "ajojojo",
+    "description": "asdjoasdo",
+    "price": "213",
+    "thumbnail": "C:\\fakepath\\Group 159.png",
+    "code": "213dsadsdsd",
+    "stock": "12312",
+    "id": 21
+  },
+  {
+    "title": "ajojojo",
+    "description": "asdjoasdo",
+    "price": "213343",
+    "thumbnail": "C:\\fakepath\\Group 159.png",
+    "code": "213dsadsdsdasd",
+    "stock": "12312",
+    "id": 22
   }
 ]

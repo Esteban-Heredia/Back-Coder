@@ -1,11 +1,21 @@
 <div>
-    <h1>Productos en tiempo real</h1>
-     {{!-- <ul>
-        {{#each products}}
-        <li>{{title}} - Precio: ${{price}}</li>
-        {{/each}}
-    </ul> --}}
-    <input id="textbox">
+ <h1>Formulario para cargar producto</h1>
+    <form id="textbox">
+        <label>Nombre:</label>
+        <input type="text" id="title">
+        <label>Descripcion:</label>
+        <input type="text" id="description">
+        <label>Precio:</label>
+        <input type="number" id="price">
+        <label>imagen:</label>
+        <input type="file" id="thumbnail">
+        <label>Codigo:</label>
+        <input type="text" id="code">
+        <label>Stock:</label>
+        <input type="number" id="stock">
+        <input id="submit" type="submit">
+    </form>
+    <h2>Productos en tiempo real</h2>
     <p id="log"></p>
 </div>
 <script src="/socket.io/socket.io.js"></script>

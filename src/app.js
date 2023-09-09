@@ -5,6 +5,7 @@ import routerCarts from './routers/carts.js';
 import realTimeProducts from './routers/RealTimeProducts.js';
 import __dirname from './utils.js';
 import { Server } from 'socket.io';
+import ProductManager from '../ProductManager.js';
 
 const app = express();
 
@@ -31,15 +32,22 @@ const server = app.listen(8080, () => {
 });
 
 const serverSocket = new Server(server);
-
-const logs = [];
+const pManager = new ProductManager
 
 serverSocket.on('connection', socket =>{
     console.log("nuevo cliente conectado")
     
     socket.on('mensaje', data =>{
-        logs.push({ socketId: socket.id, mensaje: data });
-        serverSocket.emit('log', {logs})
+        const product =   {
+            "title": data.title,
+            "description": data.description,
+            "price": data.price,
+            "thumbnail": data.thumbnail,
+            "code": data.code,
+            "stock": data.stock,
+          }
+        console.log(data)
+        pManager.addProduct(product)
+        serverSocket.emit('log',{products: pManager.getProducts()})
     })
-
 })

@@ -115,5 +115,23 @@
     "stock": "54555",
     "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
     "id": 13
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "20",
+    "code": "asd5551a",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 14
+  },
+  {
+    "title": "asdadaa",
+    "description": "sad",
+    "price": "20",
+    "code": "asd5551ada",
+    "stock": "54555",
+    "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
+    "id": 15
   }
 ]

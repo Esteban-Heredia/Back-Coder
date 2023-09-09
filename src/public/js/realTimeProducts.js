@@ -1,29 +1,19 @@
-// En realTimeProducts.js
 const socket = io();
 
-// Inicializa la variable products como un arreglo vacío
-let products = [];
+const input = document.getElementById('textbox');
+const log = document.getElementById('log');
 
-// Escuchar el evento 'productosActualizados' desde el servidor
-socket.on('productosActualizados', (data) => {
-  products = data.products; // Actualiza la variable products con los datos recibidos
+input.addEventListener('keyup', evt=>{
+   if (evt.key === "Enter"){
+    socket.emit('mensaje', input.value);
+    input.value ="";
+   }
+})
 
-  // Lógica para renderizar los datos en la página
-  const ul = document.querySelector('ul');
-  ul.innerHTML = ''; // Limpia la lista existente
-
-  // Verifica si products es un arreglo antes de usar forEach
-  if (Array.isArray(products)) {
-    // Renderiza los productos actualizados en la lista
-    products.forEach((product) => {
-      const li = document.createElement('li');
-      li.textContent = `${product.title} - Precio: $${product.price}`;
-      ul.appendChild(li);
+socket.on ('log', data=>{
+    let mensajes = "";
+    data.logs.forEach(log => {
+        mensajes += `${log.socketId} dice: ${log.mensaje} <br/>`
     });
-  } else {
-    console.error('La variable products no es un arreglo válido.');
-  }
-});
-
-// Emitir un evento para solicitar datos iniciales (opcional)
-socket.emit('solicitarDatosIniciales');
+    log.innerHTML = mensajes
+})

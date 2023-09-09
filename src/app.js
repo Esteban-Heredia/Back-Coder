@@ -32,7 +32,14 @@ const server = app.listen(8080, () => {
 
 const serverSocket = new Server(server);
 
+const logs = [];
+
 serverSocket.on('connection', socket =>{
     console.log("nuevo cliente conectado")
-    socket.emit('productosActualizados', realTimeProducts)
+    
+    socket.on('mensaje', data =>{
+        logs.push({ socketId: socket.id, mensaje: data });
+        serverSocket.emit('log', {logs})
+    })
+
 })

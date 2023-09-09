@@ -9,6 +9,15 @@
     "id": 1
   },
   {
+    "title": "Producto1",
+    "description": "Descripción del producto 1",
+    "price": 15,
+    "thumbnail": "ruta/imagen1.jpg",
+    "code": "ABC12313",
+    "stock": 50,
+    "id": 2
+  },
+  {
     "title": "Producto3",
     "description": "Descripción del producto 3",
     "price": 10,

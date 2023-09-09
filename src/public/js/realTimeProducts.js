@@ -39,7 +39,7 @@ socket.on("log", ({ products }) => {
 
   products.forEach((product) => {
     const listItem = document.createElement("li");
-    listItem.innerText = `${product.title} - Precio: $${product.price}`;
+    listItem.innerText = `ID:${product.id} --- ${product.title} --- Precio: $${product.price}`;
     productList.appendChild(listItem);
   });
 });

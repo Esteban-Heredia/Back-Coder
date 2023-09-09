@@ -36,6 +36,7 @@ const pManager = new ProductManager
 
 serverSocket.on('connection', socket =>{
     console.log("nuevo cliente conectado")
+    serverSocket.emit('log',{products: pManager.getProducts()})
     
     socket.on('agregar', data =>{
         const product =   {

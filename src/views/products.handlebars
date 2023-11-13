@@ -1,8 +1,14 @@
 <div>
-      <h1>Lista de Productos</h1>
+     <h1>Lista de Productos</h1>
     <ul>
-        {{#each products}}
-        <li>{{title}} - Precio: ${{price}}</li>
+        {{#each product}}
+        <li>
+            <h2>{{title}}</h2>
+            <p>Descripción: {{description}}</p>
+            <p>Precio: {{price}}</p>
+            <p>Código: {{code}}</p>
+            <p>Stock: {{stock}}</p>
+        </li>
         {{/each}}
     </ul>
 </div>

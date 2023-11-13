@@ -124,5 +124,14 @@
     "stock": "54555",
     "thumbnail": "http://localhost:8080/static/img/smartphone-mockup-phone-with-blank-screen-templat-2022-12-31-06-08-13-utc.jpg",
     "id": 16
+  },
+  {
+    "title": "azd",
+    "description": "asd",
+    "price": "233",
+    "thumbnail": "C:\\fakepath\\1 (1).png",
+    "code": "133231313sdasd",
+    "stock": "23",
+    "id": 17
   }
 ]

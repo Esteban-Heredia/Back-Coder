@@ -1,22 +1,17 @@
 import { Router } from 'express';
-import ProductManager from '../../ProductManager.js';
-import { uploader } from '../utils.js';
+import ProductManager from '../../../../ProductManager.js';
+import { uploader } from '../../../utils.js';
 
-const realTimeProducts = Router();
+const routerProducts = Router();
 const productManager = new ProductManager();
 
-realTimeProducts.get('/', (req, res) => {
+routerProducts.get('/', (req, res) => {
     const products = productManager.getProducts()
 
-    res.render('realTimeProducts',{ products });
+    res.render('products',{ products });
 });
 
-realTimeProducts.get('/getProducts', (req, res) => {
-  const products = productManager.getProducts();
-  res.json(products);
-});
-
-realTimeProducts.get('/:id' ,(req,res) => {
+routerProducts.get('/:id' ,(req,res) => {
   const productid = parseInt(req.params.id)
   const product = productManager.getProductById(productid)
 
@@ -27,7 +22,7 @@ realTimeProducts.get('/:id' ,(req,res) => {
 }
 })
 
-realTimeProducts.delete('/:id', (req, res) => {
+routerProducts.delete('/:id', (req, res) => {
     const productId = parseInt(req.params.id);
     const product = productManager.deleteProduct(productId)
 
@@ -38,7 +33,7 @@ realTimeProducts.delete('/:id', (req, res) => {
     }
 });
 
-realTimeProducts.post('/',uploader.single('thumbnail'), (req, res) => {
+routerProducts.post('/',uploader.single('thumbnail'), (req, res) => {
     const newProduct = req.body;
     newProduct.thumbnail = `http://localhost:8080/static/img/${req.file.filename}`
     const product = productManager.addProduct(newProduct)
@@ -50,7 +45,7 @@ realTimeProducts.post('/',uploader.single('thumbnail'), (req, res) => {
     }
   });
 
-realTimeProducts.put('/:id', (req, res) => {
+routerProducts.put('/:id', (req, res) => {
     const productId = parseInt(req.params.id);
     const updatedProduct = req.body;
     const product = productManager.updateProduct(productId,updatedProduct)
@@ -62,4 +57,4 @@ realTimeProducts.put('/:id', (req, res) => {
     }
 });
 
-export default realTimeProducts;
+export default routerProducts;

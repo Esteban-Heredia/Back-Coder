@@ -1,11 +1,15 @@
 import express from 'express';
 import handlebars from 'express-handlebars';
-import routerProducts from './routers/products.js';
-import routerCarts from './routers/carts.js';
-import realTimeProducts from './routers/RealTimeProducts.js';
 import __dirname from './utils.js';
-import { Server } from 'socket.io';
-import ProductManager from '../ProductManager.js';
+import mongoose from 'mongoose';
+import userRouter from './dao/dbMongo/users.js'
+import productMongo from './dao/dbMongo/products.js'
+import cartMongo from './dao/dbMongo/carts.js'
+import chatMongo from './dao/dbMongo/message.js'
+import socket from './dao/socket/socket.js';
+
+
+import { Server, Socket } from 'socket.io';
 
 const app = express();
 
@@ -22,45 +26,20 @@ app.use('/static', express.static (`${__dirname}/public`))
 app.get('/',(req,res)=>{
     res.render('index')
 } )
-app.use('/products', routerProducts);
-app.use('/realTimeProducts', realTimeProducts);
 
-app.use('/api/carts', routerCarts);
+//mongodb
+app.use('/api/users', userRouter)
+app.use('/products', productMongo)
+app.use('/api/carts', cartMongo)
+
+app.use('/chat', chatMongo)
+
 
 const server = app.listen(8080, () => {
     console.log('server on');
 });
 
+mongoose.connect('mongodb+srv://CoderTest:djItjt2I5obBBSoH@coder.gmrlxlh.mongodb.net/ecommerce')
+
 const serverSocket = new Server(server);
-const pManager = new ProductManager
-
-serverSocket.on('connection', socket =>{
-    console.log("nuevo cliente conectado")
-    serverSocket.emit('log',{products: pManager.getProducts()})
-    
-    socket.on('agregar', data =>{
-        const product =   {
-            "title": data.title,
-            "description": data.description,
-            "price": data.price,
-            "thumbnail": data.thumbnail,
-            "code": data.code,
-            "stock": data.stock,
-          }
-        console.log(data)
-        pManager.addProduct(product)
-        serverSocket.emit('log',{products: pManager.getProducts()})
-    })
-
-    socket.on('eliminar', data => {
-        const productId = data;
-        const deletedProduct = pManager.deleteProduct(productId);
-
-        if (deletedProduct) {
-            console.log(`Producto eliminado con ID ${productId}`);
-            serverSocket.emit('log', { products: pManager.getProducts() });
-        } else {
-            console.log(`No se pudo eliminar el producto con ID ${productId}`);
-        }
-    });
-})
+socket(serverSocket)

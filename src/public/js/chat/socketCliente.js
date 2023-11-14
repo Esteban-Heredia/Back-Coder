@@ -1,7 +1,8 @@
 const socketClient = io()
 
-export const cargarChat = () =>{
+export const cargarChat = (renderCallback) =>{
     socketClient.on('conversacion', (data)=>{
+        renderCallback(data)        
         console.log(data)
     })
 }

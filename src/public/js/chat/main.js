@@ -1,7 +1,7 @@
 import { cargarChat } from "./socketCliente.js";
-import { mandarMensaje } from "./chat.js";
+import { mandarMensaje, renderizarChat } from "./chat.js";
 
-cargarChat();
+cargarChat(renderizarChat);
 
 const messageForm = document.querySelector("#message-form");
 

@@ -8,3 +8,21 @@ export const mandarMensaje = (e) => {
 
   guardarMensaje(user, mensaje)
 };
+
+export const renderizarChat = (data) => {
+  const chatList = document.getElementById('chat-list');
+
+  chatList.innerHTML = '';
+
+  data.forEach((chat) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+          <p>User:</p> ${chat.user}
+          <br>
+          <p>Message:</p> ${chat.mensajes}
+          <br>
+          <p>Hora:</p> ${chat.timestamp}
+      `;
+      chatList.appendChild(li);
+  });
+}

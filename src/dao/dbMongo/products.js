@@ -28,9 +28,17 @@ router.post("/", async (req, res) => {
 
 router.get('/', async (req, res)=>{
     try {
-        const product = await productModel.find().lean();
-        console.log(product)
-        res.render('products' , {product})
+      const {page= 1, limit= 10} =req.query;
+
+      const options = {
+        page: parseInt(page, 10),
+        limit: parseInt(limit, 10),
+      };
+
+      const result =await productModel.paginate({}, options);
+      const parsedDocs = result.docs.map(doc => doc.toObject());
+      
+        res.render('products' ,  { docs: parsedDocs, hasPrevPage: result.hasPrevPage, hasNextPage: result.hasNextPage, nextPage: result.nextPage, prevPage: result.prevPage });
     } catch (error) { 
         console.error('error al obtener los productos');
         res.status(500).send({error:'error en el servidor'})

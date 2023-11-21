@@ -5,8 +5,17 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    let users = await userModel.find();
-    res.send({ result: "success", payload: users });
+    const { page = 1, limit = 10 } = req.query;
+
+    const options = {
+      page: parseInt(page, 10),
+      limit: parseInt(limit, 10),
+    };
+
+    const result = await userModel.paginate({}, options);
+    const parsedDocs = result.docs.map(doc => doc.toObject());
+
+    res.render('user', { docs: parsedDocs, hasPrevPage: result.hasPrevPage, hasNextPage: result.hasNextPage, nextPage: result.nextPage, prevPage: result.prevPage });
   } catch (error) {
     console.log("Error en la operación GET de usuarios en MongoDB:", error);
     res.status(500).send({ status: 'error', error: 'Error en el servidor' });

@@ -28,9 +28,9 @@ app.get('/',(req,res)=>{
 } )
 
 //mongodb
-app.use('/api/users', userRouter)
+app.use('/users', userRouter)
 app.use('/products', productMongo)
-app.use('/api/carts', cartMongo)
+app.use('/carts', cartMongo)
 
 app.use('/chat', chatMongo)
 

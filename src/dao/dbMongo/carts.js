@@ -37,9 +37,9 @@ router.post("/:cartId/products/:productId", async (req, res) => {
 
   router.get("/", async (req, res) => {
     try {
-      const carritos = await cartModel.find();
-  
-      res.send({ status: "success", payload: carritos });
+      const carritos = await cartModel.find().lean();
+      console.log(carritos)
+      res.render('carts', {carritos} );
     } catch (error) {
       console.error("Error al obtener todos los carritos:", error);
       res.status(500).send({ error: "Error en el servidor" });

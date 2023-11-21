@@ -1,7 +1,7 @@
 <div>
      <h1>Lista de Productos</h1>
     <ul>
-        {{#each product}}
+        {{#each docs}}
         <li>
             <h2>{{title}}</h2>
             <p>Descripción: {{description}}</p>
@@ -11,4 +11,12 @@
         </li>
         {{/each}}
     </ul>
+
+    {{#if hasPrevPage}}
+    <a href="/products?page={{prevPage}}"> <button>Anterior</button> </a>
+    {{/if }}
+
+    {{#if hasNextPage}}
+    <a href="/products?page={{nextPage}}"> <button>Siguiente</button> </a>
+    {{/if }}
 </div>

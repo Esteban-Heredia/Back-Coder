@@ -24,16 +24,17 @@ router.get("/", async (req, res) => {
 
 router.post('/', async (req,res) =>{
   try {
-    let {nombre, apellido, email} = req.body;
-    if(!nombre || !apellido || !email) return res.status(400).send({status:'error', error:'Datos incompletos'});
+    let {nombre, apellido, email, contrasena} = req.body;
+    if(!nombre || !apellido || !email || !contrasena) return res.status(400).send({status:'error', error:'Datos incompletos'});
     
     let result = await userModel.create({
       nombre,
       apellido,
-      email
+      email,
+      contrasena
     });
   
-    res.send({status:'Usuario creado', payload:result});
+    res.send({status: 'El usuario se creo correctamente' , payload:result} );
   } catch (error) {
     console.log("Error en la operación POST de usuarios en MongoDB:", error);
     res.status(500).send({ status: 'error', error: 'Error en el servidor' });

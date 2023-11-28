@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  contrasena: String,
 });
 
 userSchema.plugin(mongoosePaginate);

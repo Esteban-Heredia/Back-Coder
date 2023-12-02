@@ -11,6 +11,8 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import registro from './dao/sessions/registro.js';
 import login from './dao/sessions/login.js';
+import passport from "passport";
+import initializePassport from "./config/passportConfig.js";
 
 import { Server, Socket } from "socket.io";
 
@@ -41,6 +43,9 @@ app.use(
     saveUninitialized: false,
   })
 );
+initializePassport()
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/log', (req,res)=>{
     if (req.session.counter){
@@ -58,6 +63,7 @@ app.get("/", (req, res) => {
 
 app.use('/login', login)
 app.use('/register' , registro)
+
 
 //mongodb
 app.use("/users", userRouter);

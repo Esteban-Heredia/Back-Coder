@@ -14,7 +14,6 @@ async function registrarUsuario() {
     });
 
     const result = await response.json();
-
     if (result.status === "El usuario se creo correctamente") {
       alert("Usuario creado con éxito");
     } else {

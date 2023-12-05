@@ -14,7 +14,7 @@ async function registrarUsuario() {
     });
 
     const result = await response.json();
-    if (result.status === "El usuario se creo correctamente") {
+    if (result.status === "success") {
       alert("Usuario creado con éxito");
     } else {
       alert("Error al crear el usuario");
@@ -39,7 +39,8 @@ async function login() {
         });
 
         const data = await response.json();
-
+        console.log(data)
+        console.log(response)
         if (response.ok) {
             alert("Inicio de sesión exitoso");
         } else {

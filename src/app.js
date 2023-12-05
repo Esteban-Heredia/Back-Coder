@@ -7,12 +7,14 @@ import productMongo from "./dao/dbMongo/products.js";
 import cartMongo from "./dao/dbMongo/carts.js";
 import chatMongo from "./dao/dbMongo/message.js";
 import socket from "./dao/socket/socket.js";
+import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import registro from './dao/sessions/registro.js';
 import login from './dao/sessions/login.js';
 import passport from "passport";
 import initializePassport from "./config/passportConfig.js";
+import failRegistro from './dao/sessions/failRegistro.js'
 
 import { Server, Socket } from "socket.io";
 
@@ -28,9 +30,8 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use("/static", express.static(`${__dirname}/public`));
 
-
 //session
-
+app.use(cookieParser('coderSecret'))
 app.use(
   session({
     store:MongoStore.create({
@@ -47,15 +48,15 @@ initializePassport()
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/log', (req,res)=>{
-    if (req.session.counter){
-        req.session.counter++;
-        res.render ('log')
-    } else {
-        req.session.counter = 1
-        res.render("log")
-    }
-})
+// app.get('/log', (req,res)=>{
+//     if (req.session.counter){
+//         req.session.counter++;
+//         res.render ('log')
+//     } else {
+//         req.session.counter = 1
+//         res.render("log")
+//     }
+// })
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -63,6 +64,8 @@ app.get("/", (req, res) => {
 
 app.use('/login', login)
 app.use('/register' , registro)
+app.use('/failRegister', failRegistro)
+
 
 
 //mongodb

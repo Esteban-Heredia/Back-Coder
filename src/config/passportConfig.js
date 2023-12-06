@@ -1,5 +1,6 @@
 import passport from "passport";
 import local from "passport-local";
+import GitHubStrategy from 'passport-github2'
 import { userModel } from "../dao/models/user.js";
 import { createHash, isValidPassword } from "../utils.js";
 
@@ -45,7 +46,7 @@ const initializePassport = () => {
     },
     async (username, contrasena, done) => {
         try {
-            let user = await userModel.findOne({ email: username });
+            const user = await userModel.findOne({ email: username });
             if (!user) {
                 console.log("el usuario no existe")
                 return done(null, false);
@@ -60,6 +61,33 @@ const initializePassport = () => {
         }
     })
   );
+
+  // passport.use('github', new GitHubStrategy({
+  //   clientID: 'Iv1.e4e2b78542f1414f',
+  //   clientSecret: '0f8f25537cbe67f8fd1fe076c1a812c13f49f4c0',
+  //   callbackURL: 'http://localhost:8080/api/sessions/githubcallback',
+  // }, async (accessToken, refreshToken, profile, done) => {
+  //   console.log('ayuda passport')
+  //   try {
+  //     console.log(profile)
+  //     let user = await userModel.find({ email: profile._json.email })
+  //     if (!user) {
+  //       let newUser = {
+  //         nombre: profile._json.name,
+  //         apellido: profile._json.lastName,
+  //         email: profile._json.email,
+  //         contrasena: "",
+  //       };
+  //       let result = await userModel.create(newUser);
+  //       done(null, result)
+  //     } else {
+  //       done(null, result);
+  //     }
+  //   } catch (error) {
+  //     return done(error)
+  //   }
+  // }));
+  
 
   passport.serializeUser((user, done) => {
     done(null, user._id);

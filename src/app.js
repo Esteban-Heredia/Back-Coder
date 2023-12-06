@@ -14,7 +14,8 @@ import registro from './dao/sessions/registro.js';
 import login from './dao/sessions/login.js';
 import passport from "passport";
 import initializePassport from "./config/passportConfig.js";
-import failRegistro from './dao/sessions/failRegistro.js'
+import failRegistro from './dao/sessions/failRegistro.js';
+import loginGitHub from './dao/sessions/loginGitHub.js';
 
 import { Server, Socket } from "socket.io";
 
@@ -48,25 +49,14 @@ initializePassport()
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.get('/log', (req,res)=>{
-//     if (req.session.counter){
-//         req.session.counter++;
-//         res.render ('log')
-//     } else {
-//         req.session.counter = 1
-//         res.render("log")
-//     }
-// })
-
 app.get("/", (req, res) => {
   res.render("index");
 });
 
 app.use('/login', login)
+// app.use('/api/sessions', loginGitHub )
 app.use('/register' , registro)
 app.use('/failRegister', failRegistro)
-
-
 
 //mongodb
 app.use("/users", userRouter);

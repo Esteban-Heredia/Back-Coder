@@ -4,12 +4,13 @@ import passport from "passport";
 const router = Router();
 
 router.get("/", (req, res) => {
-       if (req.session.counter){
-            req.session.counter++;
-        } else {
-            req.session.counter = 1
-            res.render("log");
-        }
+      //  if (req.session.counter){
+      //       req.session.counter++;
+      //   } else {
+      //       req.session.counter = 1
+      //       res.render("log");
+      //   }
+        res.render("log");
   });
 
 router.post("/", passport.authenticate("login"), (req, res) => {
@@ -18,7 +19,7 @@ router.post("/", passport.authenticate("login"), (req, res) => {
     return res
       .redirect(400).send("/failRegistro", { status: "error", error: "invalid credentials" });
   }
-  delete req.user.contrasena;
+  delete req.user.password;
   req.session.user = req.user;
   res.send({ status: "success", payload: req.user });
 });

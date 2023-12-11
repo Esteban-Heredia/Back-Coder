@@ -4,13 +4,22 @@ import mongoosePaginate from 'mongoose-paginate-v2'
 const userCollection = "usuarios";
 
 const userSchema = new mongoose.Schema({
-  nombre: String,
-  apellido: String,
+  first_name: String,
+  last_name: String,
   email: {
     type: String,
     unique: true,
   },
-  contrasena: String,
+  age: Number,
+  password: String,
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'cart'
+  },
+  role: {
+    type: String,
+    default: 'user'
+  }
 });
 
 userSchema.plugin(mongoosePaginate);

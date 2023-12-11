@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/login', login)
-// app.use('/api/sessions', loginGitHub )
+app.use('/api/sessions', loginGitHub )
 app.use('/register' , registro)
 app.use('/failRegister', failRegistro)
 

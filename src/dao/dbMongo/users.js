@@ -24,14 +24,14 @@ router.get("/", async (req, res) => {
 
 router.post('/', async (req,res) =>{
   try {
-    let {nombre, apellido, email, contrasena} = req.body;
-    if(!nombre || !apellido || !email || !contrasena) return res.status(400).send({status:'error', error:'Datos incompletos'});
+    let {first_name, last_name, email, password} = req.body;
+    if(!first_name || !last_name || !email || !password) return res.status(400).send({status:'error', error:'Datos incompletos'});
     
     let result = await userModel.create({
-      nombre,
-      apellido,
+      first_name,
+      last_name,
       email,
-      contrasena
+      password
     });
   
     res.send({status: 'El usuario se creo correctamente' , payload:result} );
@@ -44,7 +44,7 @@ router.post('/', async (req,res) =>{
 router.put('/:uid', async(req,res)=>{
   let {uid} = req.params;
   let userToReplace = req.body;
-  if(!userToReplace.nombre || !userToReplace.apellido || !userToReplace.email)
+  if(!userToReplace.first_name || !userToReplace.last_name || !userToReplace.email)
     return res.send({status:'error', error:'Datos incompletos'})
 
   let result = await userModel.updateOne({_id:uid}, userToReplace)

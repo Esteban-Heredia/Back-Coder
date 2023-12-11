@@ -1,8 +1,8 @@
 async function registrarUsuario() {
-  const nombre = document.getElementById("nombre").value;
-  const apellido = document.getElementById("apellido").value;
+  const first_name = document.getElementById("first_name").value;
+  const last_name = document.getElementById("last_name").value;
   const email = document.getElementById("email").value;
-  const contrasena = document.getElementById("contrasena").value;
+  const password = document.getElementById("password").value;
 
   try {
     const response = await fetch("http://localhost:8080/register", {
@@ -10,7 +10,7 @@ async function registrarUsuario() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ nombre, apellido, email, contrasena }),
+      body: JSON.stringify({ first_name, last_name, email, password }),
     });
 
     const result = await response.json();
@@ -27,7 +27,7 @@ async function registrarUsuario() {
 
 async function login() {
     const email = document.getElementById("email").value;
-    const contrasena = document.getElementById("contrasena").value;
+    const password = document.getElementById("password").value;
 
     try {
         const response = await fetch("http://localhost:8080/login", {
@@ -35,7 +35,7 @@ async function login() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email, contrasena }),
+            body: JSON.stringify({ email, password }),
         });
 
         const data = await response.json();

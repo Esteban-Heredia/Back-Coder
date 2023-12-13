@@ -4,17 +4,25 @@ import local from "passport-local";
 import GitHubStrategy from 'passport-github2'
 import { userModel } from "../dao/models/user.js";
 import { createHash, isValidPassword } from "../utils.js";
+import dotenv from 'dotenv'
 
 const LocalStrategy = local.Strategy;
 const JWTStrategy = jwt.Strategy;
 const ExtractJWT = jwt.ExtractJwt;
 
-const cookieExtractor = req =>{
-  let token = null;
-  if(req && req.cookies){
-    token = req.cookies['coderSecret']
-  }
-}
+dotenv.config()
+
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
+
+// const cookieExtractor = req => {
+//   let token = null;
+//   if (req && req.cookies) {
+//     token = req.cookies['coderSecret'];
+//   }
+//   return token;
+// };
 
 const initializePassport = () => {
   passport.use(
@@ -30,7 +38,7 @@ const initializePassport = () => {
         try {
           let user = await userModel.findOne({ email: username });
           if (user) {
-            console.log("el usuario ya existe");
+            console.log("El usuario ya existe");
             return done(null, false);
           }
           const newUser = {
@@ -40,9 +48,11 @@ const initializePassport = () => {
             password: createHash(password),
           };
           let result = await userModel.create(newUser);
+
+          // const token = jwt.sign({ sub: result._id }, 'coderSecret', { expiresIn: '1d' });
           return done(null, result);
         } catch (error) {
-          return done("error al obtener el usuario: " + error);
+          return done("Error al obtener el usuario: " + error);
         }
       }
     )
@@ -58,13 +68,15 @@ const initializePassport = () => {
         try {
             const user = await userModel.findOne({ email: username });
             if (!user) {
-                console.log("el usuario no existe")
+                console.log("El usuario no existe")
                 return done(null, false);
             }
   
             if (!isValidPassword(user, password)) {
                 return done(null, false)
             }
+
+            // const token = jwt.sign({ sub: user._id }, 'coderSecret', { expiresIn: '1d' });
             return done(null, user);
         } catch (error) {
             return done(error);
@@ -73,11 +85,11 @@ const initializePassport = () => {
   );
 
   passport.use('github', new GitHubStrategy({
-    clientID: 'Iv1.51a36e4a0a2e5e36',
-    clientSecret: '55b888a2f25f748a0a0f0e6c8811bff1f215fb73',
-    callbackURL: 'http://localhost:8080/api/sessions/githubCallback',
+    clientID: GITHUB_CLIENT_ID,
+    clientSecret: GITHUB_CLIENT_SECRET,
+    callbackURL: GITHUB_CALLBACK_URL,
   }, async (accessToken, refreshToken, profile, done) => {
-    console.log('ayuda passport')
+    console.log('Ayuda passport')
     try {
       console.log(profile)
       let user = await userModel.find({ githubId: profile.id })
@@ -90,27 +102,30 @@ const initializePassport = () => {
           password:'',
         };
         let result = await userModel.create(newUser);
-        console.log('lo creo al user')
-        done(null, result)
+        const jwtToken = jwt.sign({ sub: result._id, githubId: profile.id }, 'your-secret-key', { expiresIn: '1d' });
+        console.log('Lo creo al usuario')
+        done(null, { user: result, jwtToken });
       } else {
-        console.log('segun esto esta')
-        done(null, user);
+        console.log('Según esto está')
+        const jwtToken = jwt.sign({ sub: user._id, githubId: profile.id }, 'your-secret-key', { expiresIn: '1d' });
+
+        done(null, { user, jwtToken });
       }
     } catch (error) {
       return done(error)
     }
   }));
 
-  passport.use('jwt', new JWTStrategy({
-    jwtFromRequest:ExtractJWT.fromExtractors([cookieExtractor]),
-    secretOrKey:'coderSecret',
-  },async(jwt_payload,done)=>{
-    try {
-      return done (null,jwt_payload);
-    } catch (error) {
-      return done (error)
-    }
-  }))
+  // passport.use('jwt', new JWTStrategy({
+  //   jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
+  //   secretOrKey: 'coderSecret',
+  // }, async (jwt_payload, done) => {
+  //   try {
+  //     return done(null, jwt_payload);
+  //   } catch (error) {
+  //     return done(error);
+  //   }
+  // }));
   
 
   passport.serializeUser((user, done) => {

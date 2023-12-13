@@ -16,8 +16,16 @@ import passport from "passport";
 import initializePassport from "./config/passportConfig.js";
 import failRegistro from './dao/sessions/failRegistro.js';
 import loginGitHub from './dao/sessions/loginGitHub.js';
+import currents from './dao/sessions/current.js'
+import dotenv from 'dotenv';
 
 import { Server, Socket } from "socket.io";
+
+dotenv.config()
+
+const MONGO_URL = process.env.MONGO_URL;
+const SESSION_SECRET = process.env.SESSION_SECRET;
+const PORT = process.env.PORT
 
 const app = express();
 
@@ -32,15 +40,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/static", express.static(`${__dirname}/public`));
 
 //session
-app.use(cookieParser('coderSecret'))
+app.use(cookieParser(SESSION_SECRET))
 app.use(
   session({
     store:MongoStore.create({
-        mongoUrl: 'mongodb+srv://CoderTest:djItjt2I5obBBSoH@coder.gmrlxlh.mongodb.net/ecommerce',
+        mongoUrl: MONGO_URL,
         mongoOptions: {useNewUrlParser:true, useUnifiedTopology:true},
         ttl:3600,
     }),
-    secret: "coderSecret",
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
@@ -55,6 +63,7 @@ app.get("/", (req, res) => {
 
 app.use('/login', login)
 app.use('/api/sessions', loginGitHub )
+app.use('/api/sessions/current', currents )
 app.use('/register' , registro)
 app.use('/failRegister', failRegistro)
 
@@ -65,12 +74,12 @@ app.use("/carts", cartMongo);
 
 app.use("/chat", chatMongo);
 
-const server = app.listen(8080, () => {
+const server = app.listen(PORT, () => {
   console.log("server on");
 });
 
 mongoose.connect(
-  "mongodb+srv://CoderTest:djItjt2I5obBBSoH@coder.gmrlxlh.mongodb.net/ecommerce"
+  MONGO_URL
 );
 
 const serverSocket = new Server(server);

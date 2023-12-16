@@ -102,14 +102,14 @@ const initializePassport = () => {
           password:'',
         };
         let result = await userModel.create(newUser);
-        const jwtToken = jwt.sign({ sub: result._id, githubId: profile.id }, 'your-secret-key', { expiresIn: '1d' });
+        // const jwtToken = jwt.sign({ sub: result._id, githubId: profile.id }, 'your-secret-key', { expiresIn: '1d' });
         console.log('Lo creo al usuario')
-        done(null, { user: result, jwtToken });
+        done(null, { user: result });
       } else {
         console.log('Según esto está')
         const jwtToken = jwt.sign({ sub: user._id, githubId: profile.id }, 'your-secret-key', { expiresIn: '1d' });
 
-        done(null, { user, jwtToken });
+        done(null, { user });
       }
     } catch (error) {
       return done(error)
@@ -127,7 +127,6 @@ const initializePassport = () => {
   //   }
   // }));
   
-
   passport.serializeUser((user, done) => {
     done(null, user);
   });

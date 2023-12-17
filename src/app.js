@@ -17,6 +17,7 @@ import initializePassport from "./config/passportConfig.js";
 import failRegistro from './dao/sessions/failRegistro.js';
 import loginGitHub from './dao/sessions/loginGitHub.js';
 import currents from './dao/sessions/current.js'
+import mailer from './dao/mail/mailer.js'
 import dotenv from 'dotenv';
 
 import { Server, Socket } from "socket.io";
@@ -71,6 +72,8 @@ app.use('/failRegister', failRegistro)
 app.use("/users", userRouter);
 app.use("/products", productMongo);
 app.use("/carts", cartMongo);
+
+app.use('/mail', mailer)
 
 app.use("/chat", chatMongo);
 

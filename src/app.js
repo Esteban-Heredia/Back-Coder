@@ -4,6 +4,7 @@ import __dirname from "./utils.js";
 import mongoose from "mongoose";
 import userRouter from "./dao/dbMongo/users.js";
 import productMongo from "./dao/dbMongo/products.js";
+import newProduct from "./dao/routes/newProducts/newProducts.js"
 import cartMongo from "./dao/dbMongo/carts.js";
 import chatMongo from "./dao/dbMongo/message.js";
 import socket from "./dao/socket/socket.js";
@@ -71,6 +72,7 @@ app.use('/failRegister', failRegistro)
 //mongodb
 app.use("/users", userRouter);
 app.use("/products", productMongo);
+app.use('/newproduct',newProduct)
 app.use("/carts", cartMongo);
 
 app.use('/mail', mailer)

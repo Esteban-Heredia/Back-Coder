@@ -1,5 +1,6 @@
 <div>
      <h1>Lista de Productos</h1>
+     <a href="/newproduct">Crear nuevo producto</a>
     <ul>
         {{#each docs}}
         <li>
@@ -8,6 +9,8 @@
             <p>Precio: {{price}}</p>
             <p>Código: {{code}}</p>
             <p>Stock: {{stock}}</p>
+            <button onclick="editarProducto('{{_id}}')">Editar</button>
+            <button onclick="eliminarProducto('{{_id}}')">Eliminar</button>
         </li>
         {{/each}}
     </ul>
@@ -20,3 +23,5 @@
     <a href="/products?page={{nextPage}}"> <button>Siguiente</button> </a>
     {{/if }}
 </div>
+
+<script src="./js/product/products/products.js"></script>

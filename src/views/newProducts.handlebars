@@ -1,0 +1,31 @@
+<div>
+    <h1>{{#if producto}}Editar{{else}}Crear Nuevo{{/if}} Producto</h1>
+
+    <form>
+        <label for="title">Título:</label>
+        <input type="text" id="title" name="title" required value="{{#if producto}}{{producto.title}}{{/if}}">
+
+        <label for="description">Descripción:</label>
+        <textarea id="description" name="description" required>{{#if producto}}{{producto.description}}{{/if}}</textarea>
+
+        <label for="price">Precio:</label>
+        <input type="number" id="price" name="price" required value="{{#if producto}}{{producto.price}}{{/if}}">
+
+        <label for="thumbnail">Thumbnail URL:</label>
+        <input type="text" id="thumbnail" name="thumbnail" value="{{#if producto}}{{producto.thumbnail}}{{/if}}">
+
+        <label for="code">Código:</label>
+        <input type="text" id="code" name="code" required value="{{#if producto}}{{producto.code}}{{/if}}">
+
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required value="{{#if producto}}{{producto.stock}}{{/if}}">
+
+        {{#if producto}}
+            <!-- Campo oculto para almacenar el _id del producto cuando estás editando -->
+            <input type="text" id="_id" name="_id" value="{{producto._id}}">
+        {{/if}}
+
+        <button type="button" onclick="crearProducto()">enviar</button>
+    </form>
+</div>
+<script src="./js/product/newProducts/newProducts.js"></script>

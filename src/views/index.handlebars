@@ -1,3 +1,11 @@
+ {{#if isAuthenticated}}
+        <p>Bienvenido, {{username}}!</p>
+        <!-- Contenido adicional para usuarios autenticados -->
+    {{else}}
+        <p>Por favor, inicia sesión.</p>
+        <!-- Contenido adicional para usuarios no autenticados -->
+    {{/if}}
+    
 <div>
  <a href="/products">Ver la lista de productos</a>
  <a href="/realTimeProducts">Productos en tiempo real</a>

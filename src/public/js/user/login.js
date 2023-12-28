@@ -26,27 +26,34 @@ async function registrarUsuario() {
 
 
 async function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    try {
-        const response = await fetch("http://localhost:8080/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-        });
+  try {
+    console.log('1111111111111')
+    const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+    });
 
-        const data = await response.json();
-        console.log(data)
-        console.log(response)
-        if (response.ok) {
-            alert("Inicio de sesión exitoso");
-        } else {
-            alert(`Inicio de sesión fallido: ${data.error}`);
-        }
-    } catch (error) {
-        console.error("Error durante el inicio de sesión:", error);
-    }
+    console.log('2222222222')
+    const data = await response.json();
+    console.log('33333333333')
+    console.log("Código de estado:", response.status);
+    console.log("Datos recibidos:", data);
+
+    if (data.status === "success") {
+      alert("Inicio de sesión exitoso");
+      window.location.href = "http://localhost:8080";
+  } else {
+      alert(`Inicio de sesión fallido: ${data.error}`);
+  }
+  
+} catch (error) {
+    console.error("Error durante el inicio de sesión:", error);
+}
+
 }

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { ensureNotAuthenticated } from "../middleware/authMiddleware.js";
+import jwt from "jsonwebtoken";
 
 const router = Router();
 
@@ -10,13 +11,14 @@ router.get("/", ensureNotAuthenticated, (req, res) => {
 
 router.post("/", passport.authenticate("login"), (req, res) => {
   if (!req.user) {
-    console.log("no entro");
-    return res.status(400).send({ status: "error", error: "invalid credentials" });
+    console.log("Credenciales inválidas");
+    return res.status(401).json({ status: "error", error: "Credenciales inválidas" });
   }
-  delete req.user.password;
-  req.session.user = req.user;
-  console.log(req.user, 'algooo');
-  res.send({ status: "success", payload: req.user });
+
+  const token = req.user.token;
+
+  res.cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+  res.json({ status: "success", payload: { user: req.user.user, token } });
 });
 
 export default router;

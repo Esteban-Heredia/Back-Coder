@@ -1,9 +1,14 @@
 <div>
     <h1>USUARIOS:</h1>
+    <a href="/newuser">Crear nuevo usuario</a>
     <ul>
         {{#each docs}}
         <li>
-            <p>first_name: {{first_name}}, Apellido: {{last_name}}, Email: {{email}}</p>
+            <p>Nombre: {{first_name}}</p>
+            <p>Apellido: {{last_name}}</p>
+            <p>Email: {{email}}</p>
+            <button onclick="editarUser('{{_id}}')">Editar</button>
+            <button onclick="eliminarUser('{{_id}}')">Eliminar</button>
         </li>
         {{/each}}
     </ul>
@@ -16,3 +21,5 @@
     <a href="/users?page={{nextPage}}"> <button>Siguiente</button> </a>
     {{/if }}
 </div>
+
+<script src="./js/user/userMain.js"></script>

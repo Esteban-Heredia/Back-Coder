@@ -18,7 +18,7 @@ router.post("/", passport.authenticate("login"), (req, res) => {
   const token = req.user.token;
 
   res.cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
-  res.json({ status: "success", payload: { user: req.user.user, token } });
+  res.json({ status: "success", payload: { user: req.user.user.email, token } });
 });
 
 export default router;

@@ -1,13 +1,27 @@
-// Obtén el token JWT almacenado en la cookie
-const jwtToken = document.cookie.split('; ').find(row => row.startsWith('jwt='))?.split('=')[1];
+function hasJwtToken() {
+    var allCookies = document.cookie;
+    var jwtTokenName = 'jwt'; // Reemplaza con el nombre real de tu cookie JWT
+  
+    // Busca el nombre de la cookie JWT en la cadena de cookies
+    var jwtTokenIndex = allCookies.indexOf(jwtTokenName + '=');
+  
+    // Si el índice es mayor o igual a 0, significa que la cookie JWT está presente
+    return jwtTokenIndex >= 0;
+  }
+  
+  // Llamada a la función y muestra el resultado en la consola
+  var hasToken = hasJwtToken();
+  console.log('¿Tiene JWT token?:', hasToken);
+  
+// // Tu token
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTg4NDYyZTcxZjJiMmQ5MDRjZDE3ZjciLCJlbWFpbCI6ImFzZEBhc2QuY29tIiwiaWF0IjoxNzAzODkwODE5LCJleHAiOjE3MDM4OTQ0MTl9.zgEIHvjEFuyH8TvvF_Mh_XgRFREDSrGSwm0OpTV7SSA';
 
-if (jwtToken) {
-  // Accede directamente a la información del usuario sin decodificar el token
-  const userInfo = JSON.parse(atob(jwtToken.split('.')[1]));
+// // Almacena el token en localStorage
+// localStorage.setItem('jwtToken', token);
 
-  console.log('Información del usuario:', userInfo);
-} else {
-  // Manejar el caso en el que no se encuentre el token en la cookie
+// // Obtiene el token del localStorage
+// const storedToken = localStorage.getItem('jwtToken');
 
-  console.log('no hay cookie padre...')
-}
+// // Decodifica el token (si es necesario)
+// const decodedToken = storedToken ? JSON.parse(atob(storedToken.split('.')[1])) : null;
+// console.log(decodedToken);

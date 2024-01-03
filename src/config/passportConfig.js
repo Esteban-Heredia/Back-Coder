@@ -62,7 +62,7 @@ const initializePassport = () => {
             return done(null, false);
           }
 
-          const token = jwt.sign({ userId: user._id }, process.env.SESSION_SECRET, { expiresIn: '1h' });
+          const token = jwt.sign({ userId: user._id, email: user.email }, process.env.SESSION_SECRET, { expiresIn: '1h' });
 
           return done(null, { user, token });
         } catch (error) {
@@ -113,7 +113,7 @@ const initializePassport = () => {
       }
     )
   );
-  
+
   passport.serializeUser(function(user, cb) {
     process.nextTick(function() {
       cb(null, { id: user.id, username: user.username });

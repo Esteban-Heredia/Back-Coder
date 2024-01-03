@@ -1,0 +1,29 @@
+<div>
+
+    <h1>{{#if user}}Editar{{else}}Crear Nuevo{{/if}} usuario</h1>
+
+    <form>
+        <input type="hidden" name="_method" value="PUT">
+
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="" {{#if user}}{{user.first_name}}{{/if}}"" required>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{last_name}}" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{email}}" required>
+
+        <label for="pass">pass:</label>
+        <input type="password" id="password" name="password" value="{{password}}" required>
+
+        {{#if user}}
+        <input type="role" id="role" name="role" value="{{role}}">
+        <input type="text" id="_id" name="_id" value="{{role}}">
+        {{/if}}
+        <button type="button" onclick="crearUser()">Update User</button>
+    </form>
+
+</div>
+
+<script src="./js/user/userMain.js"></script>

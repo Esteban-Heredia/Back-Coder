@@ -2,7 +2,7 @@ async function crearUser() {
   const first_name = document.getElementById("first_name").value;
   const last_name = document.getElementById("last_name").value;
   const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const password = document.getElementById("password")?.value;
   const role = document.getElementById("role")?.value;
 
   const _id = document.getElementById("_id")
@@ -21,21 +21,24 @@ async function crearUser() {
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "same-origin",
         body: JSON.stringify({
             first_name,
             last_name,
             email,
             password,
+            role,
         }),
       });
-      const result = await response.json();
-      if(result.status === "se creo el usuario") {
-        alert("usuario creado con exito");
-      } else{ 
-        alert("Error al crear/editar el usario")
+
+      console.log(response,'aydydasydas', response.status)
+      if(response.status === 401){
+        alert("no estas autorizado mi rayyy...")
       }
-      window.location.href = "/users"
+      
+    //   window.location.href = "/users"
   } catch (error) {
+    console.log(error,'aasdasdasdasd',error?.msg)
     console.error("error en la solicitud de usuario", error);
   }
 }

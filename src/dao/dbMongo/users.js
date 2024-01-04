@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { userModel } from "../models/user.js";
 import { createHash } from "../../utils.js";
+import { ensureRole, verifyAMD } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
@@ -29,7 +30,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", ensureRole ,async (req, res) => {
   try {
     let { first_name, last_name, email, password } = req.body;
     if (!first_name || !last_name || !email || !password)
@@ -51,7 +52,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:uid", async (req, res) => {
+router.put("/:uid", verifyAMD ,async (req, res) => {
   let { uid } = req.params;
   let userToReplace = req.body;
   if (

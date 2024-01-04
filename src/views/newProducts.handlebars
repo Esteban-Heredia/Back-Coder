@@ -22,7 +22,7 @@
 
         {{#if producto}}
             <!-- Campo oculto para almacenar el _id del producto cuando estás editando -->
-            <input type="text" id="_id" name="_id" value="{{producto._id}}">
+            <input type="hidden" id="_id" name="_id" value="{{producto._id}}">
         {{/if}}
 
         <button type="button" onclick="crearProducto()">enviar</button>

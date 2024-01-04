@@ -4,26 +4,29 @@
 
     <form>
         <input type="hidden" name="_method" value="PUT">
-
+        <br>
         <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" value="" {{#if user}}{{user.first_name}}{{/if}}"" required>
-
+        <input type="text" id="first_name" name="first_name" value="{{#if user}}{{user.first_name}}{{/if}}" required>
+        <br>
         <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" value="{{last_name}}" required>
-
+        <input type="text" id="last_name" name="last_name" value="{{#if user}}{{user.last_name}}{{/if}}" required>
+        <br>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{email}}" required>
-
+        <input type="email" id="email" name="email" value="{{#if user}}{{user.email}}{{/if}}" required>
+        <br>
+        {{#unless user}}
         <label for="pass">pass:</label>
         <input type="password" id="password" name="password" value="{{password}}" required>
-
+        {{/unless}}
+        <br>
         {{#if user}}
-        <input type="role" id="role" name="role" value="{{role}}">
-        <input type="text" id="_id" name="_id" value="{{role}}">
+        <input type="role" id="role" name="role" value="{{#if user}}{{user.role}}{{/if}}">
+        <input type="hidden" id="_id" name="_id" value="{{#if user}}{{user._id}}{{/if}}">
         {{/if}}
+        <br>
         <button type="button" onclick="crearUser()">Update User</button>
     </form>
 
 </div>
 
-<script src="./js/user/userMain.js"></script>
+<script src="/js/user/userMain.js"></script>

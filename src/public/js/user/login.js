@@ -46,6 +46,7 @@ async function login() {
     console.log("Datos recibidos:", data);
 
     if (data.status === "success") {
+      localStorage.setItem('user', JSON.stringify(data))
       alert("Inicio de sesión exitoso");
       window.location.href = "http://localhost:8080";
   } else {

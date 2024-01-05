@@ -14,31 +14,36 @@ async function crearUser() {
       ? `http://localhost:8080/users/${_id}`
       : "http://localhost:8080/users";
 
-      const method = _id ? "PUT" : "POST";
+    const method = _id ? "PUT" : "POST";
 
-      const response = await fetch(url,{
-        method,
-        headers: {
-            "Content-Type": "application/json",
-        },
-        credentials: "same-origin",
-        body: JSON.stringify({
-            first_name,
-            last_name,
-            email,
-            password,
-            role,
-        }),
-      });
+    const response = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+      body: JSON.stringify({
+        first_name,
+        last_name,
+        email,
+        password,
+        role,
+      }),
+    });
 
-      console.log(response,'aydydasydas', response.status)
-      if(response.status === 401){
-        alert("no estas autorizado mi rayyy...")
-      }
-      
-    //   window.location.href = "/users"
+    console.log(response, "aydydasydas", response.status);
+    if (response.status === 200) {
+      alert("la operación a sido exitosa");
+      window.location.href = "/users";
+    }
+    
+    if (response.status === 401) {
+      alert("no estas autorizado mi rayyy...");
+      window.location.href = "/users";
+    }
+
+    window.location.href = "/users";
   } catch (error) {
-    console.log(error,'aasdasdasdasd',error?.msg)
     console.error("error en la solicitud de usuario", error);
   }
 }
@@ -52,16 +57,16 @@ async function eliminarUser(userId) {
       },
     });
 
-    const result = await response.json();
-    console.log(result, "result user");
-
-    if (result.status === "se borro correctamente") {
-      alert("usuario eliminado con éxito");
-
-      window.location.reload();
-    } else {
-      alert("Error al eliminar el usuario");
+    if (response.status === 200) {
+      alert("la operación a sido exitosa");
+      window.location.href = "/users";
     }
+
+    if (response.status === 401) {
+      alert("no estas autorizado mi rayyy...");
+      window.location.href = "/users";
+    }
+
   } catch (error) {
     console.error("Error en la solicitud:", error);
   }

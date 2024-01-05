@@ -30,7 +30,8 @@ const verifyAMD = async (req, res, next) => {
     if (user.role === "admin") return next();
     return res.status(401).send("not authorized");
   } catch (error) {
-    throw new Error (error)    
+    window.location.href = "/"
+    throw new Error (error)
   }
 };
 

@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", ensureRole ,async (req, res) => {
+router.post("/", verifyAMD, async (req, res) => {
   try {
     let { first_name, last_name, email, password } = req.body;
     if (!first_name || !last_name || !email || !password)
@@ -52,7 +52,7 @@ router.post("/", ensureRole ,async (req, res) => {
   }
 });
 
-router.put("/:uid", verifyAMD ,async (req, res) => {
+router.put("/:uid", verifyAMD, async (req, res) => {
   let { uid } = req.params;
   let userToReplace = req.body;
   if (
@@ -66,7 +66,7 @@ router.put("/:uid", verifyAMD ,async (req, res) => {
   res.send({ status: "se actualizo el usuario", payload: result });
 });
 
-router.delete("/:uid", async (req, res) => {
+router.delete("/:uid", verifyAMD, async (req, res) => {
   let { uid } = req.params;
   let result = await userModel.deleteOne({ _id: uid });
   res.send({ status: "se borro correctamente", payload: result });

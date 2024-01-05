@@ -20,7 +20,11 @@
         {{/unless}}
         <br>
         {{#if user}}
-        <input type="role" id="role" name="role" value="{{#if user}}{{user.role}}{{/if}}">
+        <select name="role" id="role" placeholder="{{#if user}}{{user.role}}{{/if}}">
+            <option value="{{#if user}}{{user.role}}{{/if}}" disabled selected>Su rol actual es:{{#if user}}{{user.role}}{{/if}}</option>
+            <option value="user">user</option>
+            <option value="admin">admin</option>
+        </select>
         <input type="hidden" id="_id" name="_id" value="{{#if user}}{{user._id}}{{/if}}">
         {{/if}}
         <br>

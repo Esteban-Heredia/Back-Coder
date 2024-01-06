@@ -14,6 +14,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import registro from './dao/sessions/registro.js';
 import login from './dao/sessions/login.js';
+import logout from './dao/routes/logout/logout.js';
 import passport from "passport";
 import initializePassport from "./config/passportConfig.js";
 import failRegistro from './dao/sessions/failRegistro.js';
@@ -80,6 +81,8 @@ app.use("/carts", cartMongo);
 app.use('/mail', mailer)
 
 app.use("/chat", chatMongo);
+
+app.use("/logout", logout);
 
 const server = app.listen(PORT, () => {
   console.log("server on");

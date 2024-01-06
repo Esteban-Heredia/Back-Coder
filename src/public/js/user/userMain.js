@@ -44,6 +44,7 @@ async function crearUser() {
 
     window.location.href = "/users";
   } catch (error) {
+    alert('se debe loguear para poder modificar los usuarios')
     console.error("error en la solicitud de usuario", error);
   }
 }

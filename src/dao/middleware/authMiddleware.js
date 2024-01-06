@@ -30,8 +30,7 @@ const verifyAMD = async (req, res, next) => {
     if (user.role === "admin") return next();
     return res.status(401).send("not authorized");
   } catch (error) {
-    window.location.href = "/"
-    throw new Error (error)
+    return res.status(401).send("Invalid token. Please log in again.");
   }
 };
 

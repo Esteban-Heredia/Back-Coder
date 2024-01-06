@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My App</title>
 </head>
+
 <body>
-    <a href="/"><h1>HOME</h1></a>
+    <div>
+        <a href="/">
+            <h1>HOME</h1>
+        </a>
+        <p id="DataContainer"></p>
+        <a id="logoutBtn" href="/logout" >Cerrar Sesión</a>
+        <a href="/login">Login</a>
+    </div>
+
     {{{body}}}
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/main.js" type="module"></script>
 </body>
+
 </html>

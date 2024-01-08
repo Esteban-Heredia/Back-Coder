@@ -1,0 +1,17 @@
+<div>
+    carrito personal
+
+    <ul>
+        {{#each productosDetalles}}
+        <li>
+            <p>Product ID: {{name}}</p>
+            <p>Cantidad: {{this.quantity}}</p>
+            <p>Precio: {{price}}</p>
+            <button onclick="eliminarDelCarrito('{{id}}')">Elimnar Del carrito</button>
+        </li>
+        {{/each}}
+    </ul>
+
+</div>
+
+<script src="/js/cart/cart.js"></script>

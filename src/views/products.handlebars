@@ -1,6 +1,8 @@
 <div>
-     <h1>Lista de Productos</h1>
-     <a href="/newproduct">Crear nuevo producto</a>
+    <h1>Lista de Productos</h1>
+    <button onclick="finalizarCompra()">Finalizar la compra</button>
+    <br>
+    <a class="edit-delete-products" href="/newproduct">Crear nuevo producto</a>
     <ul>
         {{#each docs}}
         <li>
@@ -9,8 +11,11 @@
             <p>Precio: {{price}}</p>
             <p>Código: {{code}}</p>
             <p>Stock: {{stock}}</p>
-            <button onclick="editarProducto('{{_id}}')">Editar</button>
-            <button onclick="eliminarProducto('{{_id}}')">Eliminar</button>
+            <div class="edit-delete-products">
+                <button onclick="editarProducto('{{_id}}')">Editar</button>
+                <button onclick="eliminarProducto('{{_id}}')">Eliminar</button>
+            </div>
+            <button onclick="agregarProducto('{{_id}}')" >Agregar al carrito!</button>
         </li>
         {{/each}}
     </ul>

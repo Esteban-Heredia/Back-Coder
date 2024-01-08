@@ -24,7 +24,7 @@ router.post("/", passport.authenticate("login"), (req, res) => {
     secure: process.env.NODE_ENV === "production",
   }).json({
     status: "success",
-    payload: { user: req.user.user.email, token },
+    payload: { user: req.user.user.email, role: req.user.user.role, cart: req.user.user.cart ,token },
   });
 });
 

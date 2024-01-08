@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { userModel } from "../models/user.js";
+import { cartModel } from "../models/cart.js";
 import { createHash } from "../../utils.js";
 import { ensureRole, verifyAMD } from "../middleware/authMiddleware.js";
 
@@ -30,7 +31,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", verifyAMD, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     let { first_name, last_name, email, password } = req.body;
     if (!first_name || !last_name || !email || !password)
@@ -44,6 +45,10 @@ router.post("/", verifyAMD, async (req, res) => {
       email,
       password: createHash(password),
     });
+
+    const nuevoCarrito = await cartModel.create({ products: [] });
+
+    await userModel.findByIdAndUpdate(result._id, { cart: nuevoCarrito._id });
 
     res.send({ status: "El usuario se creo correctamente", payload: result });
   } catch (error) {
